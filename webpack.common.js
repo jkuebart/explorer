@@ -2,15 +2,12 @@ const path = require('path');
 const Dotenv = require('dotenv-webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const postcssCustomProperties = require('postcss-custom-properties');
-const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const autoprefixer = require('autoprefixer');
+const {ProvidePlugin} = require('webpack');
 
 module.exports = {
   context: path.resolve(__dirname, "src"),
   entry: "./index.js",
-  optimization: {
-    minimizer: [new OptimizeCSSAssetsPlugin({})]
-  },
   output: {
     filename: "main.js",
     path: path.join(__dirname, 'dist')
@@ -27,23 +24,22 @@ module.exports = {
         ]
       },
       {
-        test: /\.scss$/,
+        test: /\.s?css$/,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: process.env.NODE_ENV === 'development',
-            },
           },
           'css-loader',
           {
             loader: 'postcss-loader',
             options: {
-              ident: 'postcss',
-              plugins: () => [
-                postcssCustomProperties(),
-                autoprefixer
-              ]
+              postcssOptions: {
+                ident: 'postcss',
+                plugins: () => [
+                  postcssCustomProperties(),
+                  autoprefixer
+                ]
+              }
             }
           },
           'sass-loader'
@@ -73,5 +69,16 @@ module.exports = {
       filename: '[name].css',
       chunkFilename: '[id].css',
     }),
-  ]
+    new ProvidePlugin({
+      process: 'process/browser',
+    }),
+  ],
+  resolve: {
+    fallback: {
+      buffer: require.resolve('buffer'),
+      http: require.resolve('stream-http'),
+      https: require.resolve('https-browserify'),
+      url: require.resolve('url'),
+    }
+  },
 };
