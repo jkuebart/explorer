@@ -14,7 +14,7 @@ class Link {
   static parseLinks(links, schema = null) {
     return Object.keys(links).reduce((parsed, key) => {
       const current = links[key];
-      const href = current.href;
+      const href = current.href ?? current;
       const rel = extract(current, 'meta.linkParams.rel', key);
       const title = schema
         ? extract(extract(schema, 'links', []).find(linkSchema => linkSchema.rel === rel), 'title', null)
