@@ -1,4 +1,4 @@
-import $RefParser from 'json-schema-ref-parser';
+import $RefParser from '@apidevtools/json-schema-ref-parser';
 import { getAttributes, getRelationships } from './normalize';
 import { request } from '../../utils/request';
 import { extract } from '../../utils';
