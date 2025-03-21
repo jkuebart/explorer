@@ -1,10 +1,10 @@
-@import 'base/variables';
-@import 'header';
-@import 'nav';
-@import 'param';
-@import 'result';
-@import 'form';
-@import 'form--select';
+@use 'base/variables';
+@use 'header';
+@use 'nav';
+@use 'param';
+@use 'result';
+@use 'form';
+@use 'form--select';
 
 html, body {
   margin: 0;
@@ -12,7 +12,7 @@ html, body {
 }
 body {
   font-size: 18px;
-  font-family: $ff-default;
+  font-family: variables.$ff-default;
   color: var(--color-text);
 }
 
@@ -121,7 +121,7 @@ li {
 }
 
 .link__text--machine {
-  font-family: $ff-mono;
+  font-family: variables.$ff-mono;
 }
 
 .link__toggle {
@@ -251,5 +251,5 @@ pre {
   font-weight: 700;
 }
 .title--machine {
-  font-family: $ff-mono;
+  font-family: variables.$ff-mono;
 }

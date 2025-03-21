@@ -1,3 +1,5 @@
+@use "base/variables";
+
 .results__row {
   margin: var(--space-s) 0;
   padding: 0 0 var(--space-s) 0;
@@ -70,7 +72,7 @@
 }
 
 .results__field__value {
-  font-family: $ff-mono;
+  font-family: variables.$ff-mono;
   padding: .5rem;
   max-height: 300px;
   overflow-y: auto;
