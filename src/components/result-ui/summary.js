@@ -5,6 +5,9 @@ import { checkIncludesPath, isEmpty } from "../../utils";
 import { LocationContext } from "../../contexts/location";
 
 const FieldValue = ({value}) => {
+  if (typeof value === "undefined") {
+    return "undefined";
+  }
   const json = JSON.stringify(value, null, '  ');
   return (
     value && typeof value === "object"
